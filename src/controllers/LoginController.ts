@@ -6,7 +6,7 @@ interface RequestWithBody extends Request {
 }
 
 @controller('/auth')
-export class LoginController {
+class LoginController {
   @get('/login')
   getLogin(req: Request, res: Response): void {
     res.send(`
@@ -36,5 +36,11 @@ export class LoginController {
     } else {
       res.send('Invalid email or password');
     }
+  }
+
+  @get('/logout')
+  getLogout(req: Request, res: Response) {
+    req.session = undefined;
+    res.redirect('/');
   }
 }
